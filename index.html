@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7edff">
+<title>星光档案 · 你是 LoliRock 的谁？</title>
+<style>
+:root{
+ --ink:#59466f;--muted:#927fa4;--pink:#f5b8dc;--lilac:#c8a5ef;--blue:#9ed9ed;
+ --line:rgba(150,119,177,.20);--glass:rgba(255,255,255,.78);
+ --shadow:0 18px 55px rgba(142,105,176,.13);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:ui-rounded,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+ background:radial-gradient(ellipse at 10% 8%,#ffe5f4 0,transparent 32%),radial-gradient(ellipse at 92% 18%,#e5e1ff 0,transparent 35%),radial-gradient(ellipse at 80% 95%,#d9f6f7 0,transparent 32%),linear-gradient(135deg,#fff9fc,#f8f5ff 55%,#f2fbff);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.28;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:24px 24px;z-index:-1}
+#stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(255,255,255,.8);animation:twinkle 3s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.2;transform:scale(.7)}to{opacity:1;transform:scale(1.5)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-13px) rotate(4deg)}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.watermark{position:fixed;top:16px;left:18px;z-index:30;font-family:Georgia,serif;font-weight:700;letter-spacing:2px;font-size:25px;color:#9a70a9;text-shadow:0 2px 12px #fff;pointer-events:none}
+.shell{width:min(760px,100%);margin:0 auto;padding:66px 18px 46px}
+.panel{background:var(--glass);border:1px solid rgba(255,255,255,.9);border-radius:30px;box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:clamp(22px,5vw,42px);position:relative;overflow:hidden}
+.panel:before{content:"";position:absolute;inset:0;border:1px solid rgba(199,163,222,.16);border-radius:inherit;pointer-events:none}
+.eyebrow{text-transform:uppercase;letter-spacing:4px;font-size:11px;color:#a58ab6;font-weight:800}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Georgia,"Songti SC",serif;font-weight:600;font-size:clamp(35px,8vw,60px);line-height:1.18;margin:14px 0;color:#70517f}
+h2{font-family:Georgia,"Songti SC",serif;font-size:clamp(25px,6vw,37px);line-height:1.35;color:#70517f;margin:12px 0 18px}
+p{line-height:1.85}
+.sub{color:var(--muted);font-size:15px;line-height:1.9}
+.hero{text-align:center;padding-top:12px}
+.planet-wrap{width:210px;height:210px;margin:10px auto 24px;position:relative;animation:float 6s ease-in-out infinite}
+.planet{position:absolute;inset:30px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff9ff 0 5%,#f8c5e7 20%,#c7b2f2 56%,#8ccce7 100%);box-shadow:inset -17px -16px 30px rgba(112,87,155,.19),0 0 42px rgba(215,161,225,.48),0 0 85px rgba(164,197,241,.3)}
+.planet:before{content:"";position:absolute;width:56%;height:19%;border-radius:50%;background:rgba(255,255,255,.25);left:17%;top:28%;transform:rotate(-28deg);filter:blur(3px)}
+.orbit{position:absolute;inset:18px 0;border:2px solid rgba(179,143,210,.55);border-radius:50%;transform:rotate(-23deg);animation:orbit 22s linear infinite}
+.orbit:after{content:"✦";position:absolute;right:9%;top:4%;font-size:24px;color:#fff;text-shadow:0 0 12px #dca8ef}
+.moon{position:absolute;width:25px;height:25px;border-radius:50%;background:linear-gradient(135deg,#fff,#f4c8e9);right:12px;top:27px;box-shadow:0 0 18px #fff}
+.spark{position:absolute;color:white;text-shadow:0 0 12px #d5a6e9;font-size:22px}
+.spark.s1{left:5px;top:60px}.spark.s2{right:2px;bottom:45px;font-size:15px}.spark.s3{left:35px;bottom:15px;font-size:13px}
+.pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.pill{font-size:12px;color:#8d72a5;border:1px solid rgba(176,143,204,.25);background:rgba(255,255,255,.65);padding:7px 12px;border-radius:99px}
+.btn{border:0;border-radius:999px;padding:15px 24px;font-size:16px;font-weight:800;cursor:pointer;color:white;background:linear-gradient(105deg,#df91cb,#b28ce5 55%,#83cbe4);box-shadow:0 10px 25px rgba(180,130,205,.23);transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:saturate(1.08)}
+.btn:active{transform:scale(.98)}
+.btn.secondary{color:#856b98;background:rgba(255,255,255,.78);border:1px solid #e7d9ed;box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.note{font-size:12px;color:#a391b0;margin-top:20px}
+.hidden{display:none!important}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.counter{font-size:13px;color:#9a82ac;font-weight:800;letter-spacing:1px}
+.progress{height:8px;background:#f0e7f4;border-radius:99px;overflow:hidden;margin-bottom:26px}
+.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#e9a7d6,#b99be9,#91d2e6);border-radius:99px;transition:width .35s}
+.scene{background:linear-gradient(115deg,rgba(250,226,247,.72),rgba(241,235,255,.7));border-left:3px solid #c7a3e2;padding:18px 19px;border-radius:0 22px 22px 0;color:#796487;line-height:1.9;margin:20px 0 25px;font-size:15px}
+.options{display:grid;gap:13px}
+.option{display:flex;align-items:flex-start;gap:15px;width:100%;text-align:left;border:1.5px solid rgba(175,151,190,.25);background:rgba(255,255,255,.78);border-radius:23px;padding:18px 17px;color:#665575;font:inherit;line-height:1.85;cursor:pointer;transition:.2s}
+.option:hover{border-color:#d9a9dd;transform:translateY(-1px);box-shadow:0 8px 22px rgba(179,135,194,.10)}
+.option.selected{background:linear-gradient(110deg,rgba(247,220,250,.92),rgba(255,231,244,.92));border-color:#cb9dd5;box-shadow:0 0 0 3px rgba(205,157,213,.13)}
+.letter{flex:0 0 42px;height:42px;border-radius:14px;display:grid;place-items:center;color:white;font-weight:900;background:linear-gradient(140deg,#d994d0,#a98ce5);font-size:17px}
+.option-copy{flex:1}
+.selected-hint{display:block;color:#a184ad;font-size:12px;margin-top:5px}
+.nav{display:flex;gap:12px;margin-top:25px}
+.nav .btn{flex:1}
+.footer-tip{text-align:center;font-size:12px;color:#a18da9;line-height:1.8;margin:22px 0 0}
+.result-head{text-align:center}
+.result-art{width:154px;height:154px;border-radius:50%;margin:18px auto;display:grid;place-items:center;font-size:56px;color:white;position:relative;background:var(--rolebg);box-shadow:0 15px 38px rgba(125,91,154,.22)}
+.result-art:before,.result-art:after{content:"";position:absolute;inset:-9px;border:1px solid rgba(183,146,206,.45);border-radius:50%}
+.result-art:after{inset:-17px;border-style:dashed;opacity:.65;animation:orbit 35s linear infinite}
+.role-kicker{color:#a78bb6;font-size:12px;letter-spacing:3px;font-weight:800}
+.role-name{font-family:Georgia,"Songti SC",serif;font-size:clamp(32px,8vw,48px);margin:8px 0;color:#735381}
+.role-en{font-size:13px;letter-spacing:2px;color:#a38bb0}
+.result-summary{max-width:530px;margin:15px auto 0;color:#796887;line-height:1.95}
+.result-section{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+.result-section h3{font-size:17px;color:#7c608d;margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{background:#f8edf8;border:1px solid #efdef0;border-radius:99px;padding:7px 11px;font-size:12px;color:#896d98}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini-card{background:rgba(255,255,255,.68);border:1px solid var(--line);border-radius:19px;padding:15px}
+.mini-card b{display:block;color:#80618f;margin-bottom:6px;font-size:14px}
+.mini-card p{font-size:13px;color:#8e7b9b;line-height:1.8;margin:0}
+.bars{display:grid;gap:11px}
+.bar-row{display:grid;grid-template-columns:92px 1fr 34px;align-items:center;gap:9px;font-size:12px;color:#8c789a}
+.bar-track{height:9px;border-radius:99px;background:#f0e8f4;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#e9acd8,#b79be7,#8dcde3)}
+.dimension{display:grid;grid-template-columns:90px 1fr 30px;align-items:center;gap:9px;margin:12px 0;font-size:12px;color:#8b7898}
+.secondary-match{background:linear-gradient(110deg,#fff8fc,#f5f1ff);border:1px solid #eee0f2;border-radius:18px;padding:14px 16px;margin-top:16px;color:#8a7698;font-size:13px;line-height:1.8}
+.quote{font-family:Georgia,"Songti SC",serif;font-size:18px;line-height:1.7;color:#8a6597;text-align:center;padding:12px}
+.poster-wrap{margin-top:24px;text-align:center}
+.poster{width:min(100%,340px);aspect-ratio:3/4;margin:14px auto;border-radius:24px;overflow:hidden;padding:25px 22px;color:#72527f;background:radial-gradient(circle at 80% 15%,#fff 0,transparent 25%),linear-gradient(145deg,#fff0f8,#e9e3ff 58%,#dff7fb);box-shadow:0 12px 35px rgba(144,105,171,.18);display:flex;flex-direction:column;align-items:center;justify-content:space-between;position:relative}
+.poster:before{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.9);border-radius:17px}
+.poster .wm{align-self:flex-start;font:700 23px Georgia,serif;color:#9a70a9;z-index:1}
+.poster .poster-symbol{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;font-size:47px;color:white;background:var(--rolebg);box-shadow:0 10px 30px #b99cc7;z-index:1}
+.poster h3{font:600 30px Georgia,"Songti SC",serif;margin:10px 0 0;z-index:1}
+.poster .en{font-size:10px;letter-spacing:2px;z-index:1}
+.poster .poster-desc{font-size:12px;line-height:1.8;max-width:245px;z-index:1}
+.poster .poster-foot{font-size:10px;letter-spacing:2px;color:#a18bab;z-index:1}
+.small{font-size:12px;color:#a18eaa}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#765c88;color:white;padding:10px 17px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:50}
+.toast.show{opacity:1}
+@media(max-width:520px){
+ .shell{padding:58px 10px 30px}.panel{border-radius:25px;padding:22px 18px}
+ .option{padding:15px 13px;border-radius:20px;gap:12px}.letter{flex-basis:39px;height:39px}
+ .two-col{grid-template-columns:1fr}.nav{gap:9px}.nav .btn{padding:14px 10px;font-size:14px}
+ .watermark{font-size:22px;top:12px;left:13px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="stars"></div><div class="watermark">Tami</div><div class="toast" id="toast"></div>
+<main class="shell">
+<section id="home" class="panel hero">
+ <div class="eyebrow">L O L I R O C K · PERSONALITY FILE</div>
+ <div class="planet-wrap" aria-hidden="true"><div class="orbit"></div><div class="planet"></div><div class="moon"></div><span class="spark s1">✧</span><span class="spark s2">✦</span><span class="spark s3">⋆</span></div>
+ <div class="eyebrow">A M A R U - N I V E R S E</div>
+ <h1>你是《摇滚萝莉》<br>中的哪位角色？</h1>
+ <p class="sub">穿过星光与魔法，进入你自己的 LoliRock 故事。<br>20 道剧情情境题，解锁你的角色人格档案。</p>
+ <div class="pills"><span class="pill">✦ 20 道剧情题</span><span class="pill">✦ 8 位角色</span><span class="pill">✦ 正反派均可匹配</span></div>
+ <button class="btn" id="startBtn">开启星光测试 ✧</button>
+ <div class="note">本测试为娱乐向角色性格匹配 · 不存在正确答案</div>
+</section>
+
+<section id="quiz" class="panel hidden">
+ <div class="topline"><span class="eyebrow">YOUR STORY · IN PROGRESS</span><span class="counter" id="counter">01 / 20</span></div>
+ <div class="progress"><span id="progressFill"></span></div>
+ <div class="eyebrow" id="episode"></div>
+ <h2 id="questionTitle"></h2>
+ <div class="scene" id="scene"></div>
+ <div class="options" id="options"></div>
+ <div class="nav"><button class="btn secondary" id="prevBtn">← 上一题</button><button class="btn" id="nextBtn" disabled>下一题 →</button></div>
+ <p class="footer-tip">答案可以随时修改。系统只记录你的选择，不存在正确或错误答案。</p>
+</section>
+
+<section id="result" class="panel hidden">
+ <div class="result-head">
+  <div class="eyebrow">YOUR PERSONALITY REVEALED</div>
+  <div class="result-art" id="resultArt">✦</div>
+  <div class="role-kicker">YOUR LOLOROCK CHARACTER</div>
+  <div class="role-name" id="roleName"></div><div class="role-en" id="roleEn"></div>
+  <p class="result-summary" id="summary"></p>
+  <div class="secondary-match" id="secondary"></div>
+ </div>
+ <div class="result-section"><h3>✧ 你的性格档案</h3><p id="profile" class="sub"></p></div>
+ <div class="result-section"><h3>✧ 你的优势表现</h3><div class="two-col" id="strengths"></div></div>
+ <div class="result-section"><h3>✧ 可能的小盲点</h3><div class="mini-card"><p id="blindspot"></p></div></div>
+ <div class="result-section"><h3>✧ 五维人格光谱</h3><div id="dimensions"></div><p class="small">五维分析与角色匹配独立计算；它描述你的答题倾向，不代表好坏排名。</p></div>
+ <div class="result-section"><h3>✧ 八位角色匹配分布</h3><div class="bars" id="roleBars"></div></div>
+ <div class="result-section"><div class="quote" id="quote"></div><p class="small" style="text-align:center">原创角色风格文案，非动画原台词</p></div>
+ <div class="poster-wrap">
+  <h3>把你的星光档案保存下来</h3>
+  <div class="poster" id="poster">
+   <div class="wm">Tami</div><div class="poster-symbol" id="posterSymbol">✦</div>
+   <div><div class="en">MY LOLOROCK PERSONA</div><h3 id="posterName"></h3><div class="en" id="posterEn"></div></div>
+   <div class="poster-desc" id="posterDesc"></div><div class="poster-foot">A M A R U - N I V E R S E</div>
+  </div>
+  <button class="btn" id="savePoster">保存人格海报 PNG</button>
+  <p class="small">海报为独立生成的原创视觉排版，适合手机保存与分享。</p>
+ </div>
+ <div class="actions"><button class="btn secondary" id="reviewBtn">回顾并修改答案</button><button class="btn" id="restartBtn">重新测试 ↻</button></div>
+</section>
+</main>
+<script>
+const questions = [
+{ep:"EPISODE 01 · TO FIND A PRINCESS",title:"To Find a Princess（寻找公主）",scene:"Iris（艾瑞丝）原本以为自己只是一个普通女孩，却突然发现自己拥有魔法，而且与另一个星球的王室有着密切联系。面对完全陌生的身份和即将改变的生活，你会怎么做？",opts:[
+["你最先想到的是身边的人。无论自己究竟是什么身份，你都不希望这件事改变你和重要之人的关系。先弄清楚大家是否还愿意像以前一样相处。","Iris"],
+["身份这种事不能只靠猜。你会把已经出现的线索整理出来，确认自己的身世、魔法来源以及这次变化究竟意味着什么。","Talia"],
+["等等，所以我其实还有一个魔法世界的人生？这听起来简直像中了大奖！你会迫不及待地探索新世界，先体验再慢慢搞懂。","Auriana"],
+["不管你是谁家的公主，都不代表别人可以替你决定人生。你会直接表明：我的身份由我自己定义，谁也别想替我安排。","Carissa"]]},
+{ep:"EPISODE 02 · FLOWER POWER",title:"Flower Power（花朵的魔法）",scene:"Iris（艾瑞丝）想用魔法培育一朵特别的玫瑰参加花展，结果魔法失控，花朵和现场都变得一团糟。眼看情况越来越难收拾，你会？",opts:[
+["先把现场分成几个区域，安排谁控制失控的花、谁疏散围观者、谁处理魔法源头。乱成一锅粥可不是你的工作风格。","Talia"],
+["先看看有没有人被吓到或受伤。花展毁了还能重办，但可别让大家因为这场意外留下阴影。","Auriana"],
+["与其站在原地讨论，不如先冲上去控制最危险的那一片花丛。方法可以之后再完善，眼下先把场面稳住。","Carissa"],
+["原来的魔法都已经失控了，还守着原方案干什么？你会尝试一种完全不同的办法，比如借助现场其他植物改变魔力流向。","Lyna"]]},
+{ep:"EPISODE 03 · SING FOR ME",title:"Sing for Me（为我歌唱）",scene:"Praxina（普拉西娜）和 Mephisto（梅菲斯特）夺走了女孩们的声音，准备把这些声音送给 Gramorr（格拉莫尔）作为力量。无法唱歌，也无法正常交流，你会如何应对？",opts:[
+["先稳住大家的情绪，想办法用表情、手势和动作重新建立默契。声音被拿走了，友情和舞台感可没有。","Auriana"],
+["立刻和伙伴约定一套简单的手势暗号，甚至把它设计成一套只有你们看得懂的战斗指令。","Carissa"],
+["你会注意到某个伙伴一直在强装镇定。比起急着想办法，你先用一个熟悉的动作告诉她：我知道你现在不好受。","Lyna"],
+["既然声音能被当作力量收集，那就说明这件事一定有魔法机制。你会盯紧双胞胎的施法动作，找出声音被封存和转移的方式，再想办法反制。","Praxina"]]},
+{ep:"EPISODE 04 · THE BIRTHDAY",title:"The Birthday（神秘音乐盒）",scene:"一个神秘音乐盒让 Iris（艾瑞丝）做出奇怪的梦，梦中似乎出现了预言宝石的位置，但这可能会影响她是否参加艾伦阿姨的生日派对。面对预兆与现实的冲突，你会？",opts:[
+["先确认眼前最重要的事。你会迅速行动，去验证梦境中的线索，不想等到机会溜走才后悔。","Carissa"],
+["预言听起来很神奇，但它又不是人生说明书。你会保留自己的判断，不让一个梦替你决定该去哪里、该放弃什么。","Lyna"],
+["如果这件事关系到重要的宝石和后续行动，就必须有人掌握主动权。你会先决定行动顺序和知情范围，避免所有人各自乱跑。","Praxina"],
+["你会把音乐盒当成一场神秘演出里的关键道具，尝试用声音、节奏甚至反向播放来触发更多线索。说不定还能顺便给这场生日派对增加一点戏剧效果。","Mephisto"]]},
+{ep:"EPISODE 05 · XERIS",title:"Xeris（泽瑞斯）",scene:"Praxina（普拉西娜）和 Mephisto（梅菲斯特）夺走了 Talia（塔莉娅）的魔法 medallion（护符）。这件护符不仅拥有强大的魔法，还与寻找失踪家人有关。你会怎么夺回它？",opts:[
+["先观察护符被夺走后留下的魔法痕迹，确认双胞胎是否使用了它、有没有留下可以追踪的能量残留。","Lyna"],
+["还等什么？直接找上双胞胎，把护符抢回来。对方既然敢动重要的东西，就得做好被正面挑战的准备。","Praxina"],
+["你会故意制造一个假线索，引双胞胎以为护符还有其他秘密，再趁他们忙着得意时把真正的护符弄回来。计划要有趣，最好还能让他们气得跳脚。","Mephisto"],
+["护符只是整个局势中的一枚棋子。你会考虑它对双方的价值、对方下一步可能采取的行动，再决定怎样用最小代价换回最大的利益。","Gramorr"]]},
+{ep:"EPISODE 06 · SIRENS",title:"Sirens（海妖）",scene:"Iris（艾瑞丝）、Talia（塔莉娅）和 Auriana（奥莉安娜）帮助一名男孩寻找沉船里的家族珠宝，却遇上了 Gramorr（格拉莫尔）派来的海怪。你会？",opts:[
+["先把危险当面解决。海怪既然挡路，那就正面迎战，让它知道谁才是更强的那个。","Praxina"],
+["你会趁海怪转身时偷偷施展一个复杂的幻象咒，让它以为沉船另一侧还有更值得追逐的目标。最好再给它安排一个出场特别浮夸的假敌人。","Mephisto"],
+["你不会只盯着眼前的海怪。你会利用它的行动规律、沉船地形和珠宝的位置，设计一个让它离开关键区域的完整方案。","Gramorr"],
+["先确认男孩和伙伴都安全。珠宝再重要，也不能让别人为了它陷入危险；你会尽可能保护所有人，再想办法继续寻找。","Iris"]]},
+{ep:"EPISODE 07 · A PROMISE IS A PROMISE",title:"A Promise Is a Promise（说到做到）",scene:"女孩们在博物馆发现一颗可能是 oracle gem（预言宝石）的宝石，结果展厅里的恐龙骨架突然被魔法唤醒。面对失控的恐龙和混乱的人群，你会？",opts:[
+["这场面简直像一出灾难喜剧！你会用一个夸张的幻象把恐龙引向错误方向，再趁它追逐假目标时救人。","Mephisto"],
+["恐龙只是表面威胁，真正重要的是宝石。你会利用混乱重新安排局势，让所有人按照你的计划行动，确保宝石不会落入错误的人手中。","Gramorr"],
+["先把游客带离危险区域。你会观察恐龙的移动路线，找到安全出口，并确保没有人被落在后面。","Iris"],
+["你会先研究恐龙为什么被唤醒、它和宝石之间是否存在联系。弄清楚触发条件，才能知道怎样让它停下来。","Talia"]]},
+{ep:"EPISODE 08 · LUCKY STAR",title:"Lucky Star（幸运之星）",scene:"女孩们受邀参加一位电影明星的派对。她看起来拥有名气、财富和无数粉丝，却似乎没有真正的朋友。你会怎么做？",opts:[
+["你会留意她在派对中的处境，安排一些人和话题，让她自然地融入真正感兴趣的交流，而不是只被当作明星围观。","Gramorr"],
+["直接走过去和她聊聊。你不打算因为她是明星就表现得拘谨，真诚地把她当成一个普通朋友。","Iris"],
+["你会先观察她什么时候最放松、和谁说话时最自然，再选择合适的时机靠近她。","Talia"],
+["派对怎么能只有寒暄？你会想出一个有趣的小游戏或音乐活动，让大家一起参与，顺便让这位明星体验真正的热闹。","Auriana"]]},
+{ep:"EPISODE 09 · NO THANKS FOR THE MEMORIES!",title:"No Thanks for the Memories!（不要还我记忆！）",scene:"Mephisto（梅菲斯特）和 Praxina（普拉西娜）夺走了 Iris（艾瑞丝）的记忆，还让她误以为双胞胎是自己的朋友，甚至反过来攻击 Talia（塔莉娅）和 Auriana（奥莉安娜）。你会怎么做？",opts:[
+["先阻止 Iris 继续伤害自己和伙伴。即使她现在不认识你，也不能让她在被操纵的状态下做出无法挽回的事。","Iris"],
+["不会因为 Iris 的态度突然改变就怀疑所有事情。你会保持清醒，寻找记忆被动过手脚的证据。","Talia"],
+["你会用只有你们才懂的歌、玩笑和共同经历去唤醒她。记忆可以被拿走，但你们之间的默契可不是那么容易复制的。","Auriana"],
+["双胞胎居然敢拿朋友之间的信任做文章？你会直接迎上去，让他们为这种行为付出代价。","Carissa"]]},
+{ep:"EPISODE 10 · SHANILA SURPRISE",title:"Shanila Surprise（Shanila 惊喜）",scene:"Iris（艾瑞丝）进入更高阶段的 Shanila（莎妮拉）魔法训练，力量明显提升，但也意味着她必须面对更高难度的挑战。你会怎么训练自己？",opts:[
+["先弄清楚每个训练阶段的目标、限制和考核方式，再制定一套循序渐进的练习计划。","Talia"],
+["既然已经到了新阶段，就别只在旁边研究说明书了！你会立刻投入训练，在不断尝试中找到自己的节奏。","Auriana"],
+["你会把训练当作一次证明实力的机会。别人能做到的，你也要做到，而且最好做得更漂亮。","Carissa"],
+["你不会只盯着自己的成绩。你会观察伙伴们各自的训练状态，调整配合方式，让团队一起突破瓶颈。","Lyna"]]},
+{ep:"SEASON 2 · MUSICAL MAGICAL TOUR",title:"Musical Magical Tour（音乐魔法巡演）",scene:"Lyna（莉娜）和 Carissa（卡丽莎）加入战斗后，团队的配合方式发生变化。偏偏 Praxina（普拉西娜）和 Mephisto（梅菲斯特）又获得了新的力量，你们还没完全磨合就必须迎战。你会？",opts:[
+["先让新伙伴融入团队。你会用轻松的方式缓解紧张，让大家找到彼此的节奏，毕竟打架也需要默契。","Auriana"],
+["既然对方升级了，那就用更强的方式回应。你会主动迎战，不愿意让双胞胎觉得自己占了上风。","Carissa"],
+["你会观察战斗中谁更擅长牵制、谁适合寻找破绽，再根据现场情况灵活调整自己的位置。","Lyna"],
+["你不打算陪他们慢慢试招。既然对方敢拿新力量炫耀，你就用更强硬的攻击压过去，让他们知道升级不代表稳赢。","Praxina"]]},
+{ep:"SEASON 2 · WICKED RED",title:"Wicked Red（邪恶红发）",scene:"Auriana（奥莉安娜）使用了被施加魔法的洗发水后，突然变得傲慢、自私，甚至站到了 Praxina（普拉西娜）和 Mephisto（梅菲斯特）那边。她的攻击已经威胁到伙伴，但你知道她平时并不是这样的人。你会？",opts:[
+["先正面挡住她的攻击，绝不因为她是朋友就放水。等她恢复正常以后，再慢慢算这笔账。","Carissa"],
+["你会观察她行为变化的细节，尤其是她什么时候最容易被外界刺激影响，再寻找让她恢复正常的机会。","Lyna"],
+["你会直接告诉她：别以为换了个态度就能压过所有人。她想摆出高高在上的样子，你就偏要和她正面较量。","Praxina"],
+["你会故意设计一场“魔法洗发水新品发布会”，让 Auriana 以为自己成了主角，再在她最得意的时候偷偷反转咒语。顺便让双胞胎也尝尝被耍的滋味。","Mephisto"]]},
+{ep:"SEASON 2 · BLURRED VISION",title:"Blurred Vision（模糊的视线）",scene:"艾伦阿姨交给 Iris（艾瑞丝）一枚魔法晶体，里面保存着母亲留下的全息信息，内容要求她停止对抗 Gramorr（格拉莫尔）。但 Iris 发现信息中有些细节不太对劲，怀疑内容被双胞胎篡改。你会？",opts:[
+["不急着相信，也不急着否定。你会先回想母亲过去的表达方式，找出全息信息中不符合她习惯的地方。","Lyna"],
+["如果有人敢伪造母亲的消息来左右 Iris 的选择，那就必须让对方知道这不是可以随便开玩笑的事。你会直接追查并施压。","Praxina"],
+["你会设计一段假消息作为诱饵，让篡改信息的人以为自己的伪装没有被发现，再观察谁最先露出破绽。","Mephisto"],
+["你不会只关注这段信息是真是假。你会追查谁能接触晶体、谁从 Iris 停止行动中获益，以及这条消息会怎样改变整个局势。","Gramorr"]]},
+{ep:"SEASON 2 · PRINCESS BRENDA",title:"Princess Brenda（布伦达公主）",scene:"Brenda（布伦达）正在寻找自己的亲生母亲，终于出现了可能指向母亲的线索。与此同时，Iris（艾瑞丝）已经和 Nathaniel（纳撒尼尔）约好见面。两件事都很重要，时间却不够用。你会怎么协调？",opts:[
+["线索就在眼前，先追上去再说！机会不会一直等人，你会选择立刻行动，哪怕之后要面对一堆解释。","Praxina"],
+["你会把这件事安排得像一场精心设计的双线任务：让一边以为你去了另一边，实际上两边都能推进。最好还能让所有人都猜不到你的安排。","Mephisto"],
+["你会重新分配人员和时间，让伙伴帮助 Brenda 追查线索，同时安排好 Iris 与 Nathaniel 的沟通，尽量不让任何一边失去主动权。","Gramorr"],
+["你会先认真听 Brenda 说她为什么这么在意这次机会，再坦诚告诉 Nathaniel 约定可能需要调整。重要的人值得被认真对待。","Iris"]]},
+{ep:"SEASON 2 · CUTE AS A DOLL",title:"Cute as a Doll（可爱如玩偶）",scene:"Lyna（莉娜）和 Carissa（卡丽莎）争论战斗时究竟是魔法更重要，还是身体技巧更重要。争论中，Mephisto（梅菲斯特）的缩小咒意外击中了 Lyna，让这场讨论变得更加混乱。你会？",opts:[
+["这简直是一次绝佳的实验机会！你会把缩小后的 Lyna 当成“特别版战斗模型”，设计一套夸张的实战测试，看看魔法和身体技巧到底谁更有用。","Mephisto"],
+["你会让两个人都按自己的方式训练，然后把她们放进一个自己设计的对抗场景。谁赢谁输并不重要，重要的是最后结果必须由你掌握。","Gramorr"],
+["不管别人更喜欢哪种战斗方式，你都不会轻易否定自己的能力。你会坚持自己的训练路线，并用行动证明它的价值。","Iris"],
+["你会先把争论中的概念拆开：攻击力、灵活性、反应速度和魔力消耗分别意味着什么，再判断两种方式在不同场景中的作用。","Talia"]]},
+{ep:"SEASON 2 · AMARU-NIVERSE",title:"Amaru-niverse（阿玛茹宇宙）",scene:"Carissa（卡丽莎）想学习更多法术，尝试倍增魔法后，却意外让 Amaru（阿玛茹）分裂成三个性格不同的版本。三个 Amaru 同时出现，现场彻底失控。你会？",opts:[
+["你会先控制现场，让三个 Amaru 不要继续到处乱跑。谁也别想在你的眼皮底下把局面弄得更乱。","Gramorr"],
+["你会仔细观察三个 Amaru 在不同情境下的反应，找出它们性格和行为上的规律，再判断怎样才能恢复原状。","Iris"],
+["你会拿出 Carissa 施法时用过的咒语，做一次小范围反向尝试。先验证一个版本能不能恢复，再决定是否扩大施法。","Talia"],
+["三个 Amaru？这不是麻烦，这是三个可以同时帮忙的助手！你会先把它们分配到不同任务上，再想办法把魔法收回来。","Auriana"]]},
+{ep:"SEASON 2 · REX",title:"Rex（机器人 Rex）",scene:"Talia（塔莉娅）制作的机器人 Rex 即将参加比赛，获胜者可以得到机器人训练营名额，而 Kyle（凯尔）也非常想获得这个机会。Talia 不想放弃自己的作品，又不想让 Kyle 失望。你会？",opts:[
+["先和 Kyle 谈谈他为什么这么想进入训练营，再和 Talia 说清楚各自的顾虑。你不希望一场比赛让朋友之间产生误会。","Iris"],
+["你会注意 Kyle 在比赛前后的反应，判断他究竟是想赢得奖品，还是更在意 Talia 是否愿意给他机会。","Talia"],
+["你会先给 Rex 加上一套特别的比赛表演程序，让它在赛场上不仅能展示性能，还能成为全场最吸睛的机器人。比赛也要有娱乐性嘛！","Auriana"],
+["既然 Talia 已经认真制作了 Rex，就应该堂堂正正参加比赛。你会继续完成最后调试，用实力争取结果，不因为竞争者是朋友就自动退出。","Carissa"]]},
+{ep:"SEASON 2 · LOST IN THE SHADOWS",title:"Lost in the Shadows（迷失在阴影中）",scene:"Quicksand Ferret 乐队的 Sandy（桑迪）厌倦了成名后的生活，想回到和 Felix（费利克斯）一起单纯玩音乐的日子。聚光灯、粉丝和压力让她逐渐失去最初的快乐。你会？",opts:[
+["你会先弄清楚她到底讨厌什么：是媒体关注、演出压力，还是和 Felix 的相处发生了变化。找准问题，才好决定下一步。","Talia"],
+["不如安排一次没有观众、没有摄像机的即兴演奏！你会让她重新享受音乐本身，先找回快乐，再考虑其他问题。","Auriana"],
+["如果她已经不喜欢现在的生活，就不必为了别人的期待继续坚持。你会鼓励她勇敢做决定，不要被名气和掌声绑架。","Carissa"],
+["你会悄悄观察 Sandy 和 Felix 的互动，看看两人是否还有共同的创作默契，再设计一次让他们重新合作的机会。","Lyna"]]},
+{ep:"SEASON 2 · I WANT MY LTV",title:"I Want My LTV（我要我的 LTV）",scene:"Praxina（普拉西娜）和 Mephisto（梅菲斯特）假扮音乐视频导演，把女孩们骗进摄影棚，还要求她们摘下首饰。你知道这些首饰关系到魔法能力，对方显然另有所图。你会？",opts:[
+["你会先假装配合，表现得对拍摄非常感兴趣，甚至主动提出一些夸张的镜头创意，让双胞胎放松警惕。","Auriana"],
+["对方既然敢骗你，就别指望你乖乖配合。你会直接拒绝摘下首饰，并当面指出他们的伪装漏洞。","Carissa"],
+["你会趁拍摄现场混乱时观察出口、设备和首饰的位置，再与伙伴交换信息，寻找脱身机会。","Lyna"],
+["你会直接拿出一套更强势的反制方案，让双胞胎意识到自己惹错了人。既然他们想用首饰控制你们，那就让他们先尝尝被压制的滋味。","Praxina"]]},
+{ep:"SEASON 2 · AMATEUR HOUR",title:"Amateur Hour（业余魔术师）",scene:"年轻魔术师 Mark the Magnificent（马克·魔术大师）得到了一根真正能施展魔法的魔杖。起初他兴奋地表演，后来行为越来越反常，似乎正在受到 Praxina（普拉西娜）和 Mephisto（梅菲斯特）的精神控制。你会？",opts:[
+["你会先正面挑战控制者，打断他们的施法节奏。既然他们敢拿一个普通人当玩具，就要准备好承受反击。","Carissa"],
+["你会观察 Mark 的动作和魔杖反应，找出他在什么时候最容易受到控制，再寻找安全解除魔法的方法。","Lyna"],
+["你会故意激怒控制者，让他们把注意力集中到你身上，再趁机夺走魔杖。你可不打算让他们舒舒服服地完成计划。","Praxina"],
+["你会设计一场比 Mark 原本表演更夸张的魔术，把现场变成一场真假难辨的舞台秀，让控制者分不清哪个才是真正的魔法。","Mephisto"]]}
+];
+
+const roles={
+Iris:{cn:"艾瑞丝",en:"IRIS",symbol:"♡",bg:"linear-gradient(145deg,#f4a8d5,#bd9eea)",summary:"温柔不是软弱，而是你愿意在复杂局面里依然把人放在心上。你有自己的原则，也愿意为重要的人站出来。",profile:"你重视关系中的信任与真诚，习惯先理解他人的处境，再决定如何行动。你不喜欢把人简单归类，也不会轻易放弃自己珍惜的东西。",strengths:[["共情力","你能察觉别人没有说出口的情绪。"],["原则感","你愿意保护重要的人，也能坚持自己的判断。"]],blind:"有时太想照顾所有人的感受，容易把自己的需求放到最后。记得，你也值得被认真照顾。",quote:"“心里的光，不需要别人批准才可以闪耀。”"},
+Talia:{cn:"塔莉娅",en:"TALIA",symbol:"✧",bg:"linear-gradient(145deg,#8dcbe9,#9e9ce6)",summary:"你习惯先看清局势，再决定下一步。冷静、细致、有条理，是团队里让人安心的定心针。",profile:"你重视信息、逻辑和可验证的事实。面对混乱，你会拆解问题、寻找规律，并倾向于制定可执行的方案。",strengths:[["结构化思考","复杂问题到你手里，会逐渐变得清晰。"],["可靠执行","你不只会想办法，也会关注步骤和结果。"]],blind:"有时容易过度分析，想等所有条件都清楚才行动。现实偶尔需要先迈出一步，再边走边修正。",quote:"“答案不会自己出现，但线索一直都在。”"},
+Auriana:{cn:"奥莉安娜",en:"AURIANA",symbol:"☼",bg:"linear-gradient(145deg,#f7b2ce,#f1a8a8)",summary:"你自带明亮气场，擅长把平淡日常变成值得记住的时刻。你重视快乐，也很会给身边的人充电。",profile:"你热情、外向，愿意尝试新鲜事物。你相信情绪和氛围也有力量，常常通过创意、幽默和行动让团队重新找回活力。",strengths:[["感染力","你能带动气氛，让人愿意参与。"],["创意表达","你擅长用有趣的方式打开局面。"]],blind:"有时容易先追着新鲜感跑，细节和后续收尾可能被你暂时放在一边。",quote:"“生活已经够忙了，当然要给它加一点闪光特效！”"},
+Carissa:{cn:"卡丽莎",en:"CARISSA",symbol:"⚡",bg:"linear-gradient(145deg,#eaa0bc,#b28be4)",summary:"你不喜欢被低估，也不习惯在关键时刻退后。目标明确、行动直接，遇到挑战更容易被激起斗志。",profile:"你有强烈的自主意识和竞争心，重视实力、尊严与行动效率。你不喜欢含糊其辞，遇到问题更愿意直接面对。",strengths:[["行动力","你敢于先迈出关键一步，不轻易被压力吓退。"],["自我主张","你知道自己想要什么，也愿意为选择负责。"]],blind:"有时容易把分歧变成输赢，把不服气放在理解对方之前。强势之外，留一点协商空间会让你更有掌控力。",quote:"“我可以听取建议，但方向盘得在我手里。”"},
+Lyna:{cn:"莉娜",en:"LYNA",symbol:"☾",bg:"linear-gradient(145deg,#a8d8ed,#c3b2ef)",summary:"你观察细腻，直觉敏锐，擅长从细节里发现别人忽略的信号。你不一定最先发声，却常常看得很深。",profile:"你倾向先观察、感受和理解，再选择介入方式。你重视独立判断，也善于留意关系和环境中的微妙变化。",strengths:[["敏锐观察","你能发现言语、行为和气氛里的细微变化。"],["灵活适应","你会根据真实情况调整做法，而非死守单一路线。"]],blind:"有时会因为观察太多而迟迟不表达，别人未必能及时理解你的想法。",quote:"“安静不代表没有答案，我只是先听见了细节。”"},
+Praxina:{cn:"普拉西娜",en:"PRAXINA",symbol:"♠",bg:"linear-gradient(145deg,#b88adf,#8c5f9d)",summary:"你锋芒鲜明、好胜心强，不喜欢被轻视。你更愿意用实力回应挑衅，也不打算把主动权轻易交出去。",profile:"你自尊心强，行动果断，面对竞争会迅速进入状态。你重视力量、立场和忠诚；看似强硬，内心也有不愿示人的在意与保护欲。",strengths:[["压迫式执行力","关键时刻敢于正面迎战，不容易退缩。"],["立场鲜明","你不轻易妥协，也不会任由别人替你定义。"]],blind:"有时太在意是否被尊重，容易把无心的冒犯也当成挑战。并非每一场冲突都值得你亲自出手。",quote:"“想让我退后？先证明你有这个本事。”"},
+Mephisto:{cn:"梅菲斯特",en:"MEPHISTO",symbol:"✦",bg:"linear-gradient(145deg,#9b7acb,#d58fc6)",summary:"你擅长把常规路线变成一场意想不到的戏法。脑洞、表演欲和策略心并存，越复杂的局面越能激发你的灵感。",profile:"你喜欢设计、反转和制造惊喜，不满足于最直接的解决方案。你享受掌控节奏与观众反应，也有对自己人不轻易放下的保护心。",strengths:[["奇招创意","你能跳出常规思路，设计出令人意外的方案。"],["节奏掌控","你知道如何吸引注意力，并利用对手的预期。"]],blind:"有时太享受过程和效果，容易把事情做得过于复杂，甚至玩得有点过火。",quote:"“正面解决？多没意思。精彩的部分才刚刚开始。”"},
+Gramorr:{cn:"格拉莫尔",en:"GRAMORR",symbol:"◇",bg:"linear-gradient(145deg,#725b91,#b18caa)",summary:"你习惯站在更高的位置观察局势。比起赢下一次交锋，你更在意规则、资源和最终走向是否掌握在自己手中。",profile:"你重视长期目标、秩序和控制变量。你善于调度资源、分析利益关系，也倾向于先建立局面，再让行动按计划推进。",strengths:[["战略布局","你会考虑多步之后的影响，而非只看眼前输赢。"],["资源统筹","你善于识别关键变量，并安排有限资源。"]],blind:"有时太强调掌控，容易低估他人的自主意愿；计划越周密，也越需要给意外和信任留出空间。",quote:"“棋局还没结束。真正的结果，从来不只看眼前一步。”"}
+};
+const dims=["共情与联结","逻辑与分析","创意与表达","行动与勇气","策略与掌控"];
+const dimByRole={Iris:[3,1,1,2,1],Talia:[1,4,1,1,1],Auriana:[2,1,4,1,0],Carissa:[0,1,1,4,2],Lyna:[3,2,1,1,1],Praxina:[0,0,1,4,3],Mephisto:[0,1,4,1,2],Gramorr:[0,2,0,1,5]};
+const roleOrder=["Iris","Talia","Auriana","Carissa","Lyna","Praxina","Mephisto","Gramorr"];
+let answers=Array(20).fill(null),idx=0,finalRole=null;
+const $=id=>document.getElementById(id);
+function stars(){for(let i=0;i<48;i++){let s=document.createElement("i");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*4+"s";s.style.animationDuration=(2+Math.random()*4)+"s";$("stars").appendChild(s)}}
+function toast(t){$("toast").textContent=t;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1800)}
+function saveProgress(){try{localStorage.setItem("tami_lolirock_answers",JSON.stringify(answers));localStorage.setItem("tami_lolirock_idx",String(idx))}catch(e){}}
+function loadProgress(){try{let a=JSON.parse(localStorage.getItem("tami_lolirock_answers"));if(Array.isArray(a)&&a.length===20)answers=a;let n=Number(localStorage.getItem("tami_lolirock_idx"));if(Number.isInteger(n)&&n>=0&&n<20)idx=n}catch(e){}}
+function show(id){["home","quiz","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"})}
+function renderQuestion(){
+ let q=questions[idx];$("counter").textContent=String(idx+1).padStart(2,"0")+" / 20";$("progressFill").style.width=((idx+1)/20*100)+"%";$("episode").textContent=q.ep;$("questionTitle").textContent=q.title;$("scene").textContent=q.scene;
+ $("options").innerHTML="";
+ q.opts.forEach((o,j)=>{let b=document.createElement("button");b.className="option"+(answers[idx]===j?" selected":"");b.type="button";let letter=document.createElement("span");letter.className="letter";letter.textContent="ABCD"[j];let copy=document.createElement("span");copy.className="option-copy";copy.textContent=o[0];if(answers[idx]===j){let hint=document.createElement("span");hint.className="selected-hint";hint.textContent="已选择 · 可以继续，也可以修改";copy.appendChild(hint)}b.append(letter,copy);b.onclick=()=>{answers[idx]=j;saveProgress();renderQuestion()};$("options").appendChild(b)});
+ $("prevBtn").disabled=idx===0;$("nextBtn").disabled=answers[idx]===null;$("nextBtn").textContent=idx===19?"揭晓我的人格 ✦":"下一题 →";
+}
+function score(){
+ let r=Object.fromEntries(roleOrder.map(x=>[x,0])),available=Object.fromEntries(roleOrder.map(x=>[x,0])),d=[0,0,0,0,0];
+ questions.forEach(q=>q.opts.forEach(o=>available[o[1]]++));
+ answers.forEach((a,i)=>{if(a===null)return;let role=questions[i].opts[a][1];r[role]++;dimByRole[role].forEach((v,k)=>d[k]+=v)});
+ // Normalize each character by the number of times that character appears as an available option.
+ // This preserves the exact approved question wording while preventing exposure frequency from biasing results.
+ let pct=Object.fromEntries(roleOrder.map(x=>[x,available[x]?r[x]/available[x]*100:0]));
+ let max=Math.max(...roleOrder.map(x=>pct[x]));let tied=roleOrder.filter(x=>Math.abs(pct[x]-max)<0.000001);
+ let chosen=tied.length===1?tied[0]:[...answers].map((a,i)=>a===null?null:questions[i].opts[a][1]).reverse().find(x=>tied.includes(x))||tied[0];
+ return {r,available,pct,d,chosen,tied};
+}
+function showResult(){
+ let s=score(),role=s.chosen,data=roles[role];finalRole=role;
+ $("resultArt").textContent=data.symbol;$("resultArt").style.setProperty("--rolebg",data.bg);$("roleName").textContent=role+" · "+data.cn;$("roleEn").textContent=data.en;$("summary").textContent=data.summary;$("profile").textContent=data.profile;$("blindspot").textContent=data.blind;$("quote").textContent=data.quote;
+ $("strengths").innerHTML="";data.strengths.forEach(x=>{let c=document.createElement("div");c.className="mini-card";let b=document.createElement("b");b.textContent=x[0];let p=document.createElement("p");p.textContent=x[1];c.append(b,p);$("strengths").appendChild(c)});
+ let sorted=roleOrder.filter(x=>x!==role).sort((a,b)=>s.pct[b]-s.pct[a]);let second=sorted[0];$("secondary").textContent="你的次高匹配是 "+second+"（"+roles[second].cn+"）。你身上也有 "+roles[second].cn+" 的部分特质；角色得分已按各角色在选项中的出现次数归一化。"+(s.tied.length>1?" 本次最高分出现并列，按你最后一次选择的并列角色进行判定。":"");
+ $("dimensions").innerHTML="";let total=s.d.reduce((a,b)=>a+b,0)||1;dims.forEach((name,i)=>{let row=document.createElement("div");row.className="dimension";let lab=document.createElement("span");lab.textContent=name;let track=document.createElement("div");track.className="bar-track";let fill=document.createElement("div");fill.className="bar-fill";fill.style.width=(s.d[i]/Math.max(...s.d,1)*100)+"%";track.appendChild(fill);let num=document.createElement("b");num.textContent=Math.round(s.d[i]/total*100)+"%";row.append(lab,track,num);$("dimensions").appendChild(row)});
+ $("roleBars").innerHTML="";roleOrder.forEach(k=>{let row=document.createElement("div");row.className="bar-row";let name=document.createElement("span");name.textContent=roles[k].cn;let track=document.createElement("div");track.className="bar-track";let fill=document.createElement("div");fill.className="bar-fill";fill.style.width=s.pct[k]+"%";track.appendChild(fill);let n=document.createElement("b");n.textContent=Math.round(s.pct[k])+"%";row.append(name,track,n);$("roleBars").appendChild(row)});
+ $("posterSymbol").textContent=data.symbol;$("posterSymbol").style.setProperty("--rolebg",data.bg);$("posterName").textContent=role+" · "+data.cn;$("posterEn").textContent=data.en;$("posterDesc").textContent=data.summary;
+ show("result");
+}
+$("startBtn").onclick=()=>{loadProgress();if(answers.some(x=>x!==null)){if(confirm("检测到上次未完成的答题记录，是否继续？")){show("quiz");renderQuestion();return}answers=Array(20).fill(null);idx=0;saveProgress()}else idx=0;show("quiz");renderQuestion()};
+$("prevBtn").onclick=()=>{if(idx>0){idx--;saveProgress();renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}};
+$("nextBtn").onclick=()=>{if(answers[idx]===null)return;if(idx<19){idx++;saveProgress();renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}else showResult()};
+$("reviewBtn").onclick=()=>{idx=0;show("quiz");renderQuestion()};
+$("restartBtn").onclick=()=>{if(confirm("确定重新开始吗？当前答案将被清空。")){answers=Array(20).fill(null);idx=0;finalRole=null;localStorage.removeItem("tami_lolirock_answers");localStorage.removeItem("tami_lolirock_idx");show("home")}};
+async function savePoster(){
+ const data=roles[finalRole];if(!data)return;
+ const canvas=document.createElement("canvas");canvas.width=900;canvas.height=1200;const c=canvas.getContext("2d");
+ const g=c.createLinearGradient(0,0,900,1200);g.addColorStop(0,"#fff0f8");g.addColorStop(.55,"#eae3ff");g.addColorStop(1,"#def6fa");c.fillStyle=g;c.fillRect(0,0,900,1200);
+ const glow=c.createRadialGradient(700,170,20,700,170,450);glow.addColorStop(0,"rgba(255,255,255,.95)");glow.addColorStop(1,"rgba(255,255,255,0)");c.fillStyle=glow;c.fillRect(0,0,900,700);
+ c.strokeStyle="rgba(255,255,255,.9)";c.lineWidth=3;c.beginPath();c.roundRect(28,28,844,1144,35);c.stroke();
+ c.fillStyle="#9a70a9";c.font="bold 62px Georgia";c.fillText("Tami",75,112);
+ c.fillStyle="#a58ab6";c.font="bold 24px sans-serif";c.textAlign="center";c.fillText("MY LOLOROCK PERSONA",450,190);
+ let rg=c.createLinearGradient(310,280,590,580);rg.addColorStop(0,"#e4a6d3");rg.addColorStop(1,"#a9a0e7");c.fillStyle=rg;c.beginPath();c.arc(450,445,145,0,Math.PI*2);c.fill();
+ c.strokeStyle="rgba(255,255,255,.85)";c.lineWidth=4;c.beginPath();c.arc(450,445,170,0,Math.PI*2);c.stroke();
+ c.fillStyle="#fff";c.font="110px sans-serif";c.fillText(data.symbol,450,485);
+ c.fillStyle="#72527f";c.font="bold 62px Georgia,serif";c.fillText(finalRole+" · "+data.cn,450,730);
+ c.fillStyle="#9b85a8";c.font="28px sans-serif";c.fillText(data.en,450,790);
+ c.fillStyle="#765f85";c.font="30px sans-serif";let words=data.summary;let lines=[];let line="";for(const ch of words){if(c.measureText(line+ch).width>700){lines.push(line);line=ch}else line+=ch}if(line)lines.push(line);lines.forEach((t,i)=>c.fillText(t,450,900+i*52));
+ c.fillStyle="#a18bab";c.font="22px sans-serif";c.fillText("A M A R U - N I V E R S E",450,1090);
+ const a=document.createElement("a");a.download="Tami-LoliRock-"+finalRole+"-personality.png";a.href=canvas.toDataURL("image/png");a.click();toast("人格海报已生成");
+}
+$("savePoster").onclick=savePoster;
+stars();
+</script>
+</body></html>
